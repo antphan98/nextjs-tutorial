@@ -9,13 +9,16 @@ export const metadata: Metadata = {
 
 // Define the Page component
 export default async function Page({
-  searchParams, // Expecting searchParams to be an object, not a promise
+  searchParams, // Expecting searchParams to be a plain object
 }: {
   searchParams: { query?: string; page?: string }; // Define searchParams structure
 }) {
+  // Log the incoming searchParams for debugging
+  console.log('Incoming Search Params:', searchParams);
+
   // Safely access query and page parameters
-  const query = searchParams.query ?? ''; // Default to an empty string if undefined
-  const page = searchParams.page ?? '1';   // Default to '1' if undefined
+  const query = searchParams.query ?? ''; // Fallback to an empty string if undefined
+  const page = searchParams.page ?? '1';   // Fallback to '1' if undefined
 
   // Fetch customers based on the query parameter
   const customers = await fetchFilteredCustomers(query);
